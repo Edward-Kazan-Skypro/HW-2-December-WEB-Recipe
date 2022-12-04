@@ -2,60 +2,37 @@ package learn.project.recipewebapp.controllers;
 
 import learn.project.recipewebapp.model.Ingredient;
 import learn.project.recipewebapp.sevices.IngredientsService;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 
 @RestController()
-@AllArgsConstructor
 public class IngredientController {
 
     private final IngredientsService ingredientsService;
 
+    public IngredientController(IngredientsService ingredientsService) {
+        this.ingredientsService = ingredientsService;
+    }
+
     @GetMapping("/ingredients/{ingredientId}")
-    public Ingredient getIngredient(@PathVariable Long ingredientId) {
-        return ingredientsService.getIngredientById(ingredientId);
+    public Ingredient findIngredientById(@PathVariable String ingredientId) {
+        return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
 
-    @GetMapping("/ingredients/all")
-    public Map<Long, Ingredient> getAllIngredients() {
-        return ingredientsService.getAllIngredients();
+    @GetMapping(value = "/ingredients/all")
+    public Map<Long, Ingredient> viewAllIngredients() {
+        return ingredientsService.viewAllIngredients();
     }
 
-
-    @PostMapping("/add")
-    public void addIngredient(@PathVariable Long ingredientId, @RequestBody Ingredient ingredient){
-        ingredientsService.addIngredient(ingredient);
+    @GetMapping(value="/ingredients/add/{string_title}/{int_quantity}/{string_measureUnit}")
+    public void addIngredient(@PathVariable("string_title") String title,
+                       @PathVariable("int_quantity") int quantity,
+                      @PathVariable("string_measureUnit") String measureUnit)
+    {
+     ingredientsService.addIngredient(new Ingredient(title, quantity, measureUnit).getIngredientID(), new Ingredient(title, quantity, measureUnit));
     }
-
-
-
-    //@PostMapping
-    //public ResponseEntity createIngredient(@RequestParam String title, @RequestParam int weight, @RequestParam String measureUnit) {
-       // Ingredient createdIngredient = ingredientsService.createIngredient(title, weight, measureUnit);
-       // return ResponseEntity.ok(createdIngredient);
-    //}
-
-    //@ResponseBody
-    //@GetMapping("/ingredients/{id}")
-    //public ResponseEntity getIngredient(@PathVariable Long ingredientId) {
-    //    Ingredient ingredient = ingredientsService.getIngredientById(ingredientId);
-    //    if(ingredient == null) {
-    //        return ResponseEntity.notFound().build();
-    //    }
-    //    return ResponseEntity.ok(ingredient);
-    //}
-
-
-
-
-
-
-    //@PutMapping()
-    //public ResponseEntity updateIngredient(@RequestBody Ingredient ingredient) {
-        //Ingredient updatedIngredient = ingredientsService.updateIngredient(ingredient.getId(), ingredient);
-        //return ResponseEntity.ok(updatedIngredient);
-   //}
 }
