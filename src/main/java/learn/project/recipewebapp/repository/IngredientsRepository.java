@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class IngredientsRepository implements CommonRepository<Ingredient> {
+public class IngredientsRepository implements iRepository<Ingredient> {
 
     private final Map<Long, Ingredient> ingredientsStorage = new HashMap<>();
 
@@ -38,8 +38,13 @@ public class IngredientsRepository implements CommonRepository<Ingredient> {
     }
 
     @Override
-    public void save(Long id, Ingredient ingredient) {
-        ingredientsStorage.put(id, ingredient);
+    public void add(Long id, Ingredient ingredient) {
+        if (!ingredientsStorage.containsKey(id) & ingredient != null) {
+            ingredientsStorage.put(id, ingredient);
+        } else {
+            ingredientsStorage.put(id, new Ingredient());
+
+        }
     }
 
     @Override

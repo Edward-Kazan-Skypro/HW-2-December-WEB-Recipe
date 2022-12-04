@@ -28,6 +28,6 @@ public class RecipeService {
     }
 
     public void addRecipe(Recipe recipe) {
-        recipeRepository.save(recipe.getRecipeID(), recipe);
+        recipeRepository.add(recipe.getRecipeID(), recipe);
     }
 }

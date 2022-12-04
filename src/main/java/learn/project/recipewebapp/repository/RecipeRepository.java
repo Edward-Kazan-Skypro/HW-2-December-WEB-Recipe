@@ -6,12 +6,16 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
-public class RecipeRepository implements CommonRepository<Recipe> {
+public class RecipeRepository implements iRepository<Recipe> {
     private final Map<Long, Recipe> recipeStorage = new HashMap<>();
 
     @Override
-    public void save(Long id, Recipe recipe) {
-        recipeStorage.put(recipe.getRecipeID(), recipe);
+    public void add(Long id, Recipe recipe) {
+        if (!recipeStorage.containsKey(id) & recipe != null) {
+            recipeStorage.put(id, recipe);
+        } else {
+            recipeStorage.put(id, new Recipe());
+        }
     }
 
     @Override

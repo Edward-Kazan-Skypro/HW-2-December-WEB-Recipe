@@ -27,6 +27,6 @@ public class IngredientsService {
     }
 
     public void addIngredient(Long id, Ingredient ingredient) {
-        ingredientsRepository.save(id, ingredient);
+        ingredientsRepository.add(id, ingredient);
     }
 }

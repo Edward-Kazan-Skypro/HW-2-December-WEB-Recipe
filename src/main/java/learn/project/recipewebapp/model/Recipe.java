@@ -28,4 +28,9 @@ public class Recipe {
         recipeID = counterID;
         counterID++;
     }
+
+    public Recipe() {
+        recipeID = counterID;
+        counterID++;
+    }
 }

@@ -2,10 +2,10 @@ package learn.project.recipewebapp.repository;
 
 import java.util.Map;
 
-public interface CommonRepository <T>{
+public interface iRepository<T>{
 
     //Save method
-    void save(Long id, T t);
+    void add(Long id, T t);
 
     //Find by id
     T findById(Long id);

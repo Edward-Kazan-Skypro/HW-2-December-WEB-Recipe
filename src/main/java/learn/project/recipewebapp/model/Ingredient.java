@@ -22,4 +22,9 @@ public class Ingredient {
         ingredientID = counterID;
         counterID++;
     }
+
+    public Ingredient() {
+        ingredientID = counterID;
+        counterID++;
+    }
 }
