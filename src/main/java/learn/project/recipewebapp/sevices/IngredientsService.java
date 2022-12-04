@@ -22,7 +22,7 @@ public class IngredientsService {
         return ingredient;
     }
 
-    public Map<Long, Ingredient> viewAllIngredients(){
+    public Map<Long, Ingredient> viewAllIngredients() {
         return ingredientsRepository.viewAll();
     }
 

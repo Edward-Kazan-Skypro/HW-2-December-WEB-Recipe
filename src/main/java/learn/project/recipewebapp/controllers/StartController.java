@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController()
 public class StartController {
 
-    //Здесь попробовал хоть как-то показать как работать с приложением.
-    //И очень печалит, что так и не нашел понятного способа выводить на страницу браузера
-    //более-менее удобно читаемого текста.
-
     @GetMapping("/")
     public String startPage(){
         String welcomeMessage = "Приветствую. " +
