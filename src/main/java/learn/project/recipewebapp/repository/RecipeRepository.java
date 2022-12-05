@@ -25,10 +25,10 @@ public class RecipeRepository implements iRepository<Recipe> {
 
     @Override
     public Map<Long, Recipe> update(Long id, Recipe recipe) {
-        if (!recipeStorage.containsKey(id)){
+        if (!recipeStorage.containsKey(id)) {
             throw new IllegalArgumentException("С таким id рецепт отсутствует");
         }
-        if (recipe != null){
+        if (recipe != null) {
             recipeStorage.remove(id);
             recipeStorage.put(id, recipe);
             return recipeStorage;
@@ -39,7 +39,7 @@ public class RecipeRepository implements iRepository<Recipe> {
 
     @Override
     public void delete(Long id) {
-        if (recipeStorage.containsKey(id)){
+        if (recipeStorage.containsKey(id)) {
             recipeStorage.remove(id);
         } else {
             throw new IllegalArgumentException("С таким id рецепт отсутствует");
@@ -51,3 +51,4 @@ public class RecipeRepository implements iRepository<Recipe> {
         return null;
     }
 }
+

@@ -2,8 +2,7 @@ package learn.project.recipewebapp.repository;
 
 import java.util.Map;
 
-public interface iRepository<T>{
-
+public interface iRepository<T> {
     //Добавление
     Map<Long, T> add(Long id, T t);
 

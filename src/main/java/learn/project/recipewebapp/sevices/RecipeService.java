@@ -3,7 +3,6 @@ package learn.project.recipewebapp.sevices;
 import learn.project.recipewebapp.model.Recipe;
 import learn.project.recipewebapp.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Map;
 
 @Service

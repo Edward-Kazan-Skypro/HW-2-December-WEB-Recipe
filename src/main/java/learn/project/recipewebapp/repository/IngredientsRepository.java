@@ -2,13 +2,11 @@ package learn.project.recipewebapp.repository;
 
 import learn.project.recipewebapp.model.Ingredient;
 import org.springframework.stereotype.Repository;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @Repository
 public class IngredientsRepository implements iRepository<Ingredient> {
-
     private final Map<Long, Ingredient> ingredientsStorage = new HashMap<>();
 
     {
@@ -79,6 +77,4 @@ public class IngredientsRepository implements iRepository<Ingredient> {
         }
         return null;
     }
-
-
 }
