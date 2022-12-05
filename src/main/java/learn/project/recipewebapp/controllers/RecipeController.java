@@ -21,22 +21,22 @@ public class RecipeController {
         return recipeService.findRecipeById(Long.parseLong(recipeId));
     }
 
-    @PostMapping("update/{recipeId}")
+    @PostMapping()
     public Map<Long, Recipe> create(@RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe.getRecipeID(), recipe);
     }
 
-    @PutMapping("update/{recipeId}")
+    @PutMapping("updateByID/{recipeId}")
     public Map<Long, Recipe> update(@PathVariable String recipeId, @RequestBody Recipe recipe) {
         return recipeService.updateRecipe(Long.parseLong(recipeId), recipe);
     }
 
-    @DeleteMapping("{recipeId}")
+    @DeleteMapping("deleteByID/{recipeId}")
     public void delete(@PathVariable String recipeId) {
         recipeService.deleteRecipe(Long.parseLong(recipeId));
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "all")
     public Map<Long, Recipe> getAllRecipes() {
         return recipeService.viewAllRecipes();
     }

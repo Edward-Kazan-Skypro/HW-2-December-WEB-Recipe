@@ -22,17 +22,17 @@ public class IngredientController {
         return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
 
-    @PostMapping("create")
+    @PostMapping()
     public Map<Long, Ingredient> create(@RequestBody Ingredient ingredient) {
         return ingredientsService.createIngredient(ingredient.getIngredientID(), ingredient);
     }
 
-    @PutMapping("update/{ingredientId}")
+    @PutMapping("updateByID/{ingredientId}")
     public Map<Long, Ingredient> update(@PathVariable String ingredientId, @RequestBody Ingredient ingredient) {
         return ingredientsService.updateIngredient(Long.parseLong(ingredientId), ingredient);
     }
 
-    @DeleteMapping("delete/{ingredientId}")
+    @DeleteMapping("deleteByID/{ingredientId}")
     public void delete(@PathVariable String ingredientId) {
         ingredientsService.deleteIngredient(Long.parseLong(ingredientId));
     }
