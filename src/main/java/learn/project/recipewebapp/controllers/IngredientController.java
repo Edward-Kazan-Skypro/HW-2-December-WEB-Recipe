@@ -2,14 +2,13 @@ package learn.project.recipewebapp.controllers;
 
 import learn.project.recipewebapp.model.Ingredient;
 import learn.project.recipewebapp.sevices.IngredientsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
 @RestController()
+@RequestMapping("ingredients")
 public class IngredientController {
 
     private final IngredientsService ingredientsService;
@@ -18,21 +17,28 @@ public class IngredientController {
         this.ingredientsService = ingredientsService;
     }
 
-    @GetMapping("/ingredients/{ingredientId}")
+    @GetMapping("viewByID/{ingredientId}")
     public Ingredient findIngredientById(@PathVariable String ingredientId) {
         return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
 
-    @GetMapping(value = "/ingredients/all")
-    public Map<Long, Ingredient> viewAllIngredients() {
-        return ingredientsService.viewAllIngredients();
+    @PostMapping("create")
+    public Map<Long, Ingredient> create(@RequestBody Ingredient ingredient) {
+        return ingredientsService.createIngredient(ingredient.getIngredientID(), ingredient);
     }
 
-    @GetMapping(value="/ingredients/add/{string_title}/{int_quantity}/{string_measureUnit}")
-    public void addIngredient(@PathVariable("string_title") String title,
-                       @PathVariable("int_quantity") int quantity,
-                      @PathVariable("string_measureUnit") String measureUnit)
-    {
-     ingredientsService.addIngredient(new Ingredient(title, quantity, measureUnit).getIngredientID(), new Ingredient(title, quantity, measureUnit));
+    @PutMapping("update/{ingredientId}")
+    public Map<Long, Ingredient> update(@PathVariable String ingredientId, @RequestBody Ingredient ingredient) {
+        return ingredientsService.updateIngredient(Long.parseLong(ingredientId), ingredient);
+    }
+
+    @DeleteMapping("delete/{ingredientId}")
+    public void delete(@PathVariable String ingredientId) {
+        ingredientsService.deleteIngredient(Long.parseLong(ingredientId));
+    }
+
+    @GetMapping(value = "all")
+    public Map<Long, Ingredient> viewAllIngredients() {
+        return ingredientsService.viewAllIngredients();
     }
 }

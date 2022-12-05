@@ -2,13 +2,12 @@ package learn.project.recipewebapp.controllers;
 
 import learn.project.recipewebapp.model.Recipe;
 import learn.project.recipewebapp.sevices.RecipeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController()
+@RequestMapping("recipes")
 public class RecipeController {
 
     private final RecipeService recipeService;
@@ -17,18 +16,29 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/recipes/{recipeId}")
-    public Recipe getRecipe(@PathVariable String recipeId) {
+    @GetMapping("viewByID/{recipeId}")
+    public Recipe findRecipeById(@PathVariable String recipeId) {
         return recipeService.findRecipeById(Long.parseLong(recipeId));
     }
 
-    @GetMapping(value = "/recipes/all")
+    @PostMapping("update/{recipeId}")
+    public Map<Long, Recipe> create(@RequestBody Recipe recipe) {
+        return recipeService.addRecipe(recipe.getRecipeID(), recipe);
+    }
+
+    @PutMapping("update/{recipeId}")
+    public Map<Long, Recipe> update(@PathVariable String recipeId, @RequestBody Recipe recipe) {
+        return recipeService.updateRecipe(Long.parseLong(recipeId), recipe);
+    }
+
+    @DeleteMapping("{recipeId}")
+    public void delete(@PathVariable String recipeId) {
+        recipeService.deleteRecipe(Long.parseLong(recipeId));
+    }
+
+    @GetMapping(value = "/all")
     public Map<Long, Recipe> getAllRecipes() {
         return recipeService.viewAllRecipes();
     }
 
-    @GetMapping(value="/recipes/add/{recipe_recipe}")
-    public void addRecipe(@PathVariable("recipe_recipe") Recipe recipe) {
-        recipeService.addRecipe(recipe);
-    }
 }

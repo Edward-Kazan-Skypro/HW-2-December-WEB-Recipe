@@ -36,20 +36,40 @@ public class IngredientsRepository implements iRepository<Ingredient> {
         ingredientsStorage.put(22L, new Ingredient("Сливки 33%", 50, "мл"));
 
     }
-
     @Override
-    public void add(Long id, Ingredient ingredient) {
+    public Map<Long, Ingredient> add(Long id, Ingredient ingredient) {
         if (!ingredientsStorage.containsKey(id) & ingredient != null) {
             ingredientsStorage.put(id, ingredient);
-        } else {
-            ingredientsStorage.put(id, new Ingredient());
-
         }
+        return ingredientsStorage;
     }
 
     @Override
     public Ingredient findById(Long id) {
-        return ingredientsStorage.get(id);
+        return ingredientsStorage.getOrDefault(id, null);
+    }
+
+    @Override
+    public Map<Long, Ingredient> update(Long id, Ingredient ingredient) {
+        if (!ingredientsStorage.containsKey(id)){
+            throw new IllegalArgumentException("С таким id ингредиент отсутствует");
+        }
+        if (ingredient != null){
+            ingredientsStorage.remove(id);
+            ingredientsStorage.put(id, ingredient);
+            return ingredientsStorage;
+        } else {
+            throw new IllegalArgumentException("Поля ингредиента для обновления не заполнены");
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (ingredientsStorage.containsKey(id)){
+            ingredientsStorage.remove(id);
+        } else {
+            throw new IllegalArgumentException("С таким id ингредиент отсутствует");
+        }
     }
 
     @Override
@@ -59,4 +79,6 @@ public class IngredientsRepository implements iRepository<Ingredient> {
         }
         return null;
     }
+
+
 }

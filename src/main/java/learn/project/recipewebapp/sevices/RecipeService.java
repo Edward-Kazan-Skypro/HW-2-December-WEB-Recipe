@@ -23,11 +23,19 @@ public class RecipeService {
         return recipe;
     }
 
+    public Map<Long, Recipe> updateRecipe (Long recipeID, Recipe recipe){
+        return recipeRepository.update(recipeID, recipe);
+    }
+
+    public void deleteRecipe(Long recipeID){
+        recipeRepository.delete(recipeID);
+    }
+
     public Map<Long, Recipe> viewAllRecipes(){
         return recipeRepository.viewAll();
     }
 
-    public void addRecipe(Recipe recipe) {
-        recipeRepository.add(recipe.getRecipeID(), recipe);
+    public Map<Long, Recipe> addRecipe(Long recipeID, Recipe recipe) {
+        return recipeRepository.add(recipeID, recipe);
     }
 }

@@ -4,12 +4,18 @@ import java.util.Map;
 
 public interface iRepository<T>{
 
-    //Save method
-    void add(Long id, T t);
+    //Добавление
+    Map<Long, T> add(Long id, T t);
 
-    //Find by id
+    //Поиск по id
     T findById(Long id);
 
-    //Get all
+    //Обновление
+    Map<Long, T> update(Long id, T t);
+
+    //Удаление
+    void delete(Long id);
+
+    //Просмотр всего списка
     Map<Long, T> viewAll();
 }

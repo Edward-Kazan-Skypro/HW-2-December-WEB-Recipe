@@ -15,18 +15,22 @@ public class IngredientsService {
     }
 
     public Ingredient findIngredientById(Long ingredientId) {
-        Ingredient ingredient = ingredientsRepository.findById(ingredientId);
-        if (ingredient == null) {
-            throw new IllegalArgumentException();
-        }
-        return ingredient;
+        return ingredientsRepository.findById(ingredientId);
+    }
+
+    public Map<Long, Ingredient> createIngredient (Long ingredientID, Ingredient ingredient){
+        return ingredientsRepository.add(ingredientID, ingredient);
+    }
+
+    public Map<Long, Ingredient> updateIngredient (Long ingredientID, Ingredient ingredient){
+        return ingredientsRepository.update(ingredientID, ingredient);
+    }
+
+    public void deleteIngredient(Long ingredientID){
+        ingredientsRepository.delete(ingredientID);
     }
 
     public Map<Long, Ingredient> viewAllIngredients() {
         return ingredientsRepository.viewAll();
-    }
-
-    public void addIngredient(Long id, Ingredient ingredient) {
-        ingredientsRepository.add(id, ingredient);
     }
 }
