@@ -2,47 +2,35 @@ package learn.project.recipewebapp.sevices;
 
 import learn.project.recipewebapp.model.Ingredient;
 import learn.project.recipewebapp.repository.IngredientsRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Service
-@AllArgsConstructor
 public class IngredientsService {
-    //private Long generatedIngredientId = 1L;
     private final IngredientsRepository ingredientsRepository;
 
-    public Ingredient getIngredientById(Long ingredientId) {
-        Ingredient ingredient = ingredientsRepository.getIngredientById(ingredientId);
-        if (ingredient == null) {
-            throw new IllegalArgumentException();
-        }
-        return ingredient;
+    public IngredientsService(IngredientsRepository ingredientsRepository) {
+        this.ingredientsRepository = ingredientsRepository;
     }
 
-    public Map<Long, Ingredient> getAllIngredients(){
-        return ingredientsRepository.getAllIngredients();
+    public Ingredient findIngredientById(Long ingredientId) {
+        return ingredientsRepository.findById(ingredientId);
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        //ingredients.put(generatedIngredientId, ingredient);
+    public Map<Long, Ingredient> createIngredient(Long ingredientID, Ingredient ingredient) {
+        return ingredientsRepository.add(ingredientID, ingredient);
     }
 
-    public Ingredient createIngredient (String title, int weight, String measureUnit){
-        //generatedIngredientId++;
-        Ingredient ingredient = new Ingredient(title, weight, measureUnit);
-        return ingredient;
+    public Map<Long, Ingredient> updateIngredient(Long ingredientID, Ingredient ingredient) {
+        return ingredientsRepository.update(ingredientID, ingredient);
     }
 
+    public void deleteIngredient(Long ingredientID) {
+        ingredientsRepository.delete(ingredientID);
+    }
 
-
-    //public Ingredient updateIngredient(Long ingredientId, Ingredient ingredient) {
-    //    ingredients.put(ingredientId, ingredient);
-    //    return ingredient;
-    //}
-
-    //public Ingredient deleteIngredient(Long ingredientId) {
-    //    return ingredients.remove(ingredientId);
-    //}
+    public Map<Long, Ingredient> viewAllIngredients() {
+        return ingredientsRepository.viewAll();
+    }
 }

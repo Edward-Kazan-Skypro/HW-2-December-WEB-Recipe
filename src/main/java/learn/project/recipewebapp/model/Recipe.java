@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 @Data
 public class Recipe {
+    private long recipeID;
+    static Long counterID = 1L;
 
     //Название в формате строки;
     private String titleRecipe;
@@ -17,5 +19,17 @@ public class Recipe {
     //Шаги приготовления в формате списка строк.
     private LinkedList<String> cookingInstruction;
 
-    private long recipeID = 1L;
+    public Recipe(String titleRecipe, int cookingTimeMinutes, ArrayList<Ingredient> ingredientsList, LinkedList<String> cookingInstruction) {
+        this.titleRecipe = titleRecipe;
+        this.cookingTimeMinutes = cookingTimeMinutes;
+        this.ingredientsList = ingredientsList;
+        this.cookingInstruction = cookingInstruction;
+        recipeID = counterID;
+        counterID++;
+    }
+
+    public Recipe() {
+        recipeID = counterID;
+        counterID++;
+    }
 }

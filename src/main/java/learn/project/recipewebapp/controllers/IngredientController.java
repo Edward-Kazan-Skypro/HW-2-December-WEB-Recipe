@@ -2,60 +2,42 @@ package learn.project.recipewebapp.controllers;
 
 import learn.project.recipewebapp.model.Ingredient;
 import learn.project.recipewebapp.sevices.IngredientsService;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
 @RestController()
-@AllArgsConstructor
+@RequestMapping("ingredients")
 public class IngredientController {
-
     private final IngredientsService ingredientsService;
 
-    @GetMapping("/ingredients/{ingredientId}")
-    public Ingredient getIngredient(@PathVariable Long ingredientId) {
-        return ingredientsService.getIngredientById(ingredientId);
+    public IngredientController(IngredientsService ingredientsService) {
+        this.ingredientsService = ingredientsService;
     }
 
-    @GetMapping("/ingredients/all")
-    public Map<Long, Ingredient> getAllIngredients() {
-        return ingredientsService.getAllIngredients();
+    @GetMapping("viewByID/{ingredientId}")
+    public Ingredient findIngredientById(@PathVariable String ingredientId) {
+        return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
 
-
-    @PostMapping("/add")
-    public void addIngredient(@PathVariable Long ingredientId, @RequestBody Ingredient ingredient){
-        ingredientsService.addIngredient(ingredient);
+    @PostMapping()
+    public Map<Long, Ingredient> create(@RequestBody Ingredient ingredient) {
+        return ingredientsService.createIngredient(ingredient.getIngredientID(), ingredient);
     }
 
+    @PutMapping("updateByID/{ingredientId}")
+    public Map<Long, Ingredient> update(@PathVariable String ingredientId, @RequestBody Ingredient ingredient) {
+        return ingredientsService.updateIngredient(Long.parseLong(ingredientId), ingredient);
+    }
 
+    @DeleteMapping("deleteByID/{ingredientId}")
+    public void delete(@PathVariable String ingredientId) {
+        ingredientsService.deleteIngredient(Long.parseLong(ingredientId));
+    }
 
-    //@PostMapping
-    //public ResponseEntity createIngredient(@RequestParam String title, @RequestParam int weight, @RequestParam String measureUnit) {
-       // Ingredient createdIngredient = ingredientsService.createIngredient(title, weight, measureUnit);
-       // return ResponseEntity.ok(createdIngredient);
-    //}
-
-    //@ResponseBody
-    //@GetMapping("/ingredients/{id}")
-    //public ResponseEntity getIngredient(@PathVariable Long ingredientId) {
-    //    Ingredient ingredient = ingredientsService.getIngredientById(ingredientId);
-    //    if(ingredient == null) {
-    //        return ResponseEntity.notFound().build();
-    //    }
-    //    return ResponseEntity.ok(ingredient);
-    //}
-
-
-
-
-
-
-    //@PutMapping()
-    //public ResponseEntity updateIngredient(@RequestBody Ingredient ingredient) {
-        //Ingredient updatedIngredient = ingredientsService.updateIngredient(ingredient.getId(), ingredient);
-        //return ResponseEntity.ok(updatedIngredient);
-   //}
+    @GetMapping(value = "all")
+    public Map<Long, Ingredient> viewAllIngredients() {
+        return ingredientsService.viewAllIngredients();
+    }
 }
