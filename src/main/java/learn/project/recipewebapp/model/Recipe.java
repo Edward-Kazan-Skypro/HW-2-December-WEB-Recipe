@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 @Data
 public class Recipe {
-
     private long recipeID;
     static Long counterID = 1L;
 

@@ -2,6 +2,7 @@ package learn.project.recipewebapp.repository;
 
 import learn.project.recipewebapp.model.Ingredient;
 import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +33,8 @@ public class IngredientsRepository implements iRepository<Ingredient> {
         ingredientsStorage.put(20L, new Ingredient("Лимон", 0, "½ штуки"));
         ingredientsStorage.put(21L, new Ingredient("Мята", 50, "по вкусу"));
         ingredientsStorage.put(22L, new Ingredient("Сливки 33%", 50, "мл"));
-
     }
+
     @Override
     public Map<Long, Ingredient> add(Long id, Ingredient ingredient) {
         if (!ingredientsStorage.containsKey(id) & ingredient != null) {
@@ -49,10 +50,10 @@ public class IngredientsRepository implements iRepository<Ingredient> {
 
     @Override
     public Map<Long, Ingredient> update(Long id, Ingredient ingredient) {
-        if (!ingredientsStorage.containsKey(id)){
+        if (!ingredientsStorage.containsKey(id)) {
             throw new IllegalArgumentException("С таким id ингредиент отсутствует");
         }
-        if (ingredient != null){
+        if (ingredient != null) {
             ingredientsStorage.remove(id);
             ingredientsStorage.put(id, ingredient);
             return ingredientsStorage;
@@ -63,7 +64,7 @@ public class IngredientsRepository implements iRepository<Ingredient> {
 
     @Override
     public void delete(Long id) {
-        if (ingredientsStorage.containsKey(id)){
+        if (ingredientsStorage.containsKey(id)) {
             ingredientsStorage.remove(id);
         } else {
             throw new IllegalArgumentException("С таким id ингредиент отсутствует");

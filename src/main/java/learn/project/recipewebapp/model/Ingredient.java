@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class Ingredient {
-
     private Long ingredientID;
     //Название в формате строки;
     private String title;
@@ -13,7 +12,6 @@ public class Ingredient {
     //Единица измерения в формате строки.
     private String measureUnit;
     static Long counterID = 1L;
-
 
     public Ingredient(String title, int quantity, String measureUnit) {
         this.title = title;

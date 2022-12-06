@@ -10,7 +10,6 @@ import java.util.Map;
 @RestController()
 @RequestMapping("ingredients")
 public class IngredientController {
-
     private final IngredientsService ingredientsService;
 
     public IngredientController(IngredientsService ingredientsService) {
