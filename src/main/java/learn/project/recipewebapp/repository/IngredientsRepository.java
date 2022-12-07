@@ -39,13 +39,24 @@ public class IngredientsRepository implements iRepository<Ingredient> {
     public Map<Long, Ingredient> add(Long id, Ingredient ingredient) {
         if (!ingredientsStorage.containsKey(id) & ingredient != null) {
             ingredientsStorage.put(id, ingredient);
+            return ingredientsStorage;
         }
-        return ingredientsStorage;
+        if (ingredientsStorage.containsKey(id)){
+            throw new IllegalArgumentException("Ошибка! С таким id ингредиент уже есть");
+        }
+        if (ingredient == null) {
+            throw new IllegalArgumentException("Ошибка! Ингредиент == null");
+        }
+        return null;
     }
 
     @Override
     public Ingredient findById(Long id) {
-        return ingredientsStorage.getOrDefault(id, null);
+        if (ingredientsStorage.containsKey(id)) {
+            return ingredientsStorage.get(id);
+        } else {
+            throw new IllegalArgumentException("Ингредиент с id " + id + " отсутствует!");
+        }
     }
 
     @Override

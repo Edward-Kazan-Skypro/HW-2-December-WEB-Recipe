@@ -20,7 +20,11 @@ public class RecipeRepository implements iRepository<Recipe> {
 
     @Override
     public Recipe findById(Long id) {
-        return recipeStorage.getOrDefault(id, null);
+        if (recipeStorage.containsKey(id)) {
+            return recipeStorage.get(id);
+        } else {
+            throw new IllegalArgumentException("Рецепт с id " + id + " отсутствует!");
+        }
     }
 
     @Override
