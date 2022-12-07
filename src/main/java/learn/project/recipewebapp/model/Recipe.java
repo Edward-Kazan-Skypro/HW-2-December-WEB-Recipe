@@ -1,11 +1,13 @@
 package learn.project.recipewebapp.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Data
+@AllArgsConstructor
 public class Recipe {
 
     //Название в формате строки;
@@ -16,6 +18,4 @@ public class Recipe {
     private ArrayList<Ingredient> ingredientsList;
     //Шаги приготовления в формате списка строк.
     private LinkedList<String> cookingInstruction;
-
-    private long recipeID = 1L;
 }
