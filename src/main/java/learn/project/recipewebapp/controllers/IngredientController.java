@@ -1,14 +1,11 @@
 package learn.project.recipewebapp.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import learn.project.recipewebapp.model.Ingredient;
 import learn.project.recipewebapp.sevices.IngredientsService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 
@@ -26,7 +23,7 @@ public class IngredientController {
     @Operation(summary = "Поиск ингредиента по id",
             description = "Для поиска ингредиента введите его id"
     )
-    @ApiResponses(value = {
+    /*@ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Ингредиент найден",
@@ -37,7 +34,7 @@ public class IngredientController {
                             )
                     }
             )
-    })
+    })*/
     public Ingredient findIngredientById(@PathVariable String ingredientId) {
         return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
