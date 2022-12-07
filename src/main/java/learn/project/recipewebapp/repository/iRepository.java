@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface iRepository<T> {
     //Добавление
-    Map<Long, T> add(Long id, T t);
+    Map<Long, T> add(T t);
 
     //Поиск по id
     T findById(Long id);

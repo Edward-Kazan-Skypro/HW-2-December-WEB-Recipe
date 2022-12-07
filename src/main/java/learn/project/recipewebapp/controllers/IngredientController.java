@@ -45,7 +45,7 @@ public class IngredientController {
     @PostMapping()
     @Operation(summary = "Добавление ингредиента")
     public Map<Long, Ingredient> add(@RequestBody Ingredient ingredient) {
-        return ingredientsService.createIngredient(ingredient.getIngredientID(), ingredient);
+        return ingredientsService.addIngredient(ingredient);
     }
 
     @PutMapping("updateByID/{ingredientId}")

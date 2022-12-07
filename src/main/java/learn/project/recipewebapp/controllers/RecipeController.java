@@ -46,7 +46,7 @@ public class RecipeController {
     @PostMapping()
     @Operation(summary = "Добавление рецепта")
     public Map<Long, Recipe> add(@RequestBody Recipe recipe) {
-        return recipeService.addRecipe(recipe.getRecipeID(), recipe);
+        return recipeService.addRecipe(recipe);
     }
 
     @PutMapping("updateByID/{recipeId}")
@@ -68,5 +68,4 @@ public class RecipeController {
     public Map<Long, Recipe> getAllRecipes() {
         return recipeService.viewAllRecipes();
     }
-
 }

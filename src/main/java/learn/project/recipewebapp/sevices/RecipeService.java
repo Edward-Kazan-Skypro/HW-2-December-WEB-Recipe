@@ -3,7 +3,6 @@ package learn.project.recipewebapp.sevices;
 import learn.project.recipewebapp.model.Recipe;
 import learn.project.recipewebapp.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Map;
 
 @Service
@@ -34,7 +33,7 @@ public class RecipeService {
         return recipeRepository.viewAll();
     }
 
-    public Map<Long, Recipe> addRecipe(Long recipeID, Recipe recipe) {
-        return recipeRepository.add(recipeID, recipe);
+    public Map<Long, Recipe> addRecipe(Recipe recipe) {
+        return recipeRepository.add(recipe);
     }
 }
