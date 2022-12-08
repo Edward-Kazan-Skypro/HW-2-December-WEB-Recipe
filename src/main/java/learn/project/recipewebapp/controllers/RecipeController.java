@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import learn.project.recipewebapp.model.Recipe;
-import learn.project.recipewebapp.sevices.RecipeService;
+import learn.project.recipewebapp.services.RecipeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

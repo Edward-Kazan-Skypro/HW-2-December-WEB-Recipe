@@ -1,4 +1,4 @@
-package learn.project.recipewebapp.sevices;
+package learn.project.recipewebapp.services;
 
 import learn.project.recipewebapp.model.Recipe;
 import learn.project.recipewebapp.repository.RecipeRepository;

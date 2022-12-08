@@ -2,12 +2,14 @@ package learn.project.recipewebapp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Recipe {
 
     //Название в формате строки;

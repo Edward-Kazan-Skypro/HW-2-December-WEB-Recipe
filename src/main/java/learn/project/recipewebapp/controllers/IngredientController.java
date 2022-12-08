@@ -3,9 +3,8 @@ package learn.project.recipewebapp.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import learn.project.recipewebapp.model.Ingredient;
-import learn.project.recipewebapp.sevices.IngredientsService;
+import learn.project.recipewebapp.services.IngredientsService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 

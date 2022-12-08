@@ -2,9 +2,11 @@ package learn.project.recipewebapp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Ingredient {
 
     //Название в формате строки;
