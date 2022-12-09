@@ -1,61 +1,54 @@
 package learn.project.recipewebapp.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import learn.project.recipewebapp.model.Ingredient;
-import learn.project.recipewebapp.sevices.IngredientsService;
-import lombok.AllArgsConstructor;
+import learn.project.recipewebapp.services.IngredientsService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 
 @RestController()
-@AllArgsConstructor
+@RequestMapping("ingredients")
+@Tag(name = "Ингредиенты", description = "CRUD-операции для работы с ингредиентами")
 public class IngredientController {
-
     private final IngredientsService ingredientsService;
 
-    @GetMapping("/ingredients/{ingredientId}")
-    public Ingredient getIngredient(@PathVariable Long ingredientId) {
-        return ingredientsService.getIngredientById(ingredientId);
+    public IngredientController(IngredientsService ingredientsService) {
+        this.ingredientsService = ingredientsService;
     }
 
-    @GetMapping("/ingredients/all")
-    public Map<Long, Ingredient> getAllIngredients() {
-        return ingredientsService.getAllIngredients();
+    @GetMapping("viewByID/{ingredientId}")
+    @Operation(summary = "Поиск ингредиента по id",
+            description = "Для поиска ингредиента введите его id"
+    )
+    public Ingredient findIngredientById(@PathVariable String ingredientId) {
+        return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
 
-
-    @PostMapping("/add")
-    public void addIngredient(@PathVariable Long ingredientId, @RequestBody Ingredient ingredient){
-        ingredientsService.addIngredient(ingredient);
+    @PostMapping()
+    @Operation(summary = "Добавление ингредиента")
+    public Map<Long, Ingredient> add(@RequestBody Ingredient ingredient) {
+        return ingredientsService.addIngredient(ingredient);
     }
 
+    @PutMapping("updateByID/{ingredientId}")
+    @Operation(summary = "Обновление сведений по ингредиенту",
+            description = "Для добавления сведений введите его id и новый ингредиент")
+    public Map<Long, Ingredient> update(@PathVariable String ingredientId, @RequestBody Ingredient ingredient) {
+        return ingredientsService.updateIngredient(Long.parseLong(ingredientId), ingredient);
+    }
 
+    @DeleteMapping("deleteByID/{ingredientId}")
+    @Operation(summary = "Удаление ингредиента",
+            description = "Для удаления ингредиента введите его id")
+    public void delete(@PathVariable String ingredientId) {
+        ingredientsService.deleteIngredient(Long.parseLong(ingredientId));
+    }
 
-    //@PostMapping
-    //public ResponseEntity createIngredient(@RequestParam String title, @RequestParam int weight, @RequestParam String measureUnit) {
-       // Ingredient createdIngredient = ingredientsService.createIngredient(title, weight, measureUnit);
-       // return ResponseEntity.ok(createdIngredient);
-    //}
-
-    //@ResponseBody
-    //@GetMapping("/ingredients/{id}")
-    //public ResponseEntity getIngredient(@PathVariable Long ingredientId) {
-    //    Ingredient ingredient = ingredientsService.getIngredientById(ingredientId);
-    //    if(ingredient == null) {
-    //        return ResponseEntity.notFound().build();
-    //    }
-    //    return ResponseEntity.ok(ingredient);
-    //}
-
-
-
-
-
-
-    //@PutMapping()
-    //public ResponseEntity updateIngredient(@RequestBody Ingredient ingredient) {
-        //Ingredient updatedIngredient = ingredientsService.updateIngredient(ingredient.getId(), ingredient);
-        //return ResponseEntity.ok(updatedIngredient);
-   //}
+    @GetMapping(value = "all")
+    @Operation(summary = "Просмотр всех добавленных ингредиентов")
+    public Map<Long, Ingredient> viewAllIngredients() {
+        return ingredientsService.viewAllIngredients();
+    }
 }
