@@ -22,18 +22,6 @@ public class IngredientController {
     @Operation(summary = "Поиск ингредиента по id",
             description = "Для поиска ингредиента введите его id"
     )
-    /*@ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Ингредиент найден",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema (implementation = Ingredient.class)
-                            )
-                    }
-            )
-    })*/
     public Ingredient findIngredientById(@PathVariable String ingredientId) {
         return ingredientsService.findIngredientById(Long.parseLong(ingredientId));
     }
