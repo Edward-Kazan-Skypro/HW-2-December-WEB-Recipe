@@ -10,23 +10,40 @@ import java.nio.file.Path;
 
 @Service
 public class RecipeFilesService {
-    @Value("${path.to.recipes.file}")
+    @Value("${path.to.recipesJson.file}")
     private String recipesFilePath;
 
-    @Value("${name.of.recipes.file}")
+    @Value("${name.of.recipesJson.file}")
     private String recipeFileName;
 
-    public boolean saveRecipesToFile (String json) {
+    @Value("${path.to.recipesTXT.file}")
+    private String recipesTxtFilePath;
+
+    @Value("${name.of.recipesTXT.file}")
+    private String recipeTxtFileName;
+
+
+    public boolean saveRecipesToJsonFile(String json) {
         try {
-            cleanRecipeFile();
+            cleanRecipeJsonFile();
             Files.writeString(Path.of(recipesFilePath, recipeFileName), json);
             return true;
         } catch (IOException e) {
             return false;
         }
     }
+    public boolean saveRecipesToTxtFile(String txt) {
+        try {
+            cleanRecipeTxtFile();
+            Files.writeString(Path.of(recipesTxtFilePath, recipeTxtFileName), txt);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 
-    public String readRecipesFromFile(){
+
+    public String readRecipeFromJsonFile(){
         if (Files.exists(Path.of(recipesFilePath, recipeFileName))) {
             try {
                 return Files.readString(Path.of(recipesFilePath, recipeFileName));
@@ -37,7 +54,7 @@ public class RecipeFilesService {
         return "";
     }
 
-    public void cleanRecipeFile(){
+    public void cleanRecipeJsonFile(){
         try {
             Path path = Path.of(recipesFilePath, recipeFileName);
             Files.deleteIfExists(path);
@@ -46,10 +63,30 @@ public class RecipeFilesService {
             e.printStackTrace();
         }
     }
+    public void cleanRecipeTxtFile(){
+        try {
+            Path path = Path.of(recipesTxtFilePath, recipeTxtFileName);
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public File getFile() {
-        if (Files.exists(Path.of(recipesFilePath, recipeFileName))) {
-            return new File(recipesFilePath + "/" + recipeFileName);
+
+    //public File getJsonFile() {
+    //    if (Files.exists(Path.of(recipesFilePath, recipeFileName))) {
+    //        return new File(recipesFilePath + "/" + recipeFileName);
+    //    }
+    //   return null;
+
+    public File getJsonFile() {
+         return new File(recipesFilePath + "/" + recipeFileName);
+    }
+
+    public File getTxtFile() {
+        if (Files.exists(Path.of(recipesTxtFilePath, recipeTxtFileName))) {
+            return new File(recipesTxtFilePath + "/" + recipeTxtFileName);
         }
         return null;
     }
